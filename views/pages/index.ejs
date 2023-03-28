@@ -3,7 +3,50 @@
   <head>
     <%- include('../partials/head.ejs') %>
   </head>
-  <body>
-    <header><%- include('../pages/navbar.ejs') %></header>
+  <body style="min-height: 100%">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-4">
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+              <h4>CheeseChat 🧀</h4>
+            </div>
+            <div class="col-12 col-md-12 col-sm-12">
+              <input
+                type="text"
+                id="username"
+                placeholder="username"
+                class="form-input"
+              />
+            </div>
+            <div class="col-12 col-md-12 col-sm-12">
+              <input
+                type="text"
+                id="roomid"
+                placeholder="roomid"
+                class="form-input"
+              />
+            </div>
+            <div class="col-12 col-md-12 col-sm-12">
+              <button class="btn btn-primary" type="button">Submit</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-8">
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/008/296/859/original/concept-illustration-of-man-and-woman-friends-having-online-conversation-messaging-chatting-communication-texting-messages-in-mobile-phone-apps-flat-cartoon-style-free-vector.jpg"
+            alt="chat img"
+            class="img-fluid"
+            width="510px"
+            style="margin-left: 120px"
+          />
+        </div>
+      </div>
+    </div>
+    <style>
+      .box {
+        border: 1px solid black;
+      }
+    </style>
   </body>
 </html>
