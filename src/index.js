@@ -1,9 +1,8 @@
 import express from "express";
 const app = express();
-import livereload from "livereload";
-import connectLivereload from "connect-livereload";
 
 app.set("view engine", "ejs");
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.render("pages/index");
