@@ -1,14 +1,17 @@
-$(".submit-btn").click(function () {
+$(".submit-btn").click(async function () {
   let data = {
     username: $("#username").val(),
     roomid: $("#roomid").val(),
   };
-  if (data.name === "" || data.roomid === "") {
-    alert("Please enter a username and roomid");
+  if (data.name === "") {
+    alert("username is required");
     return;
   } else {
-    $.post("/join-room", data, function (res) {
-      console.log(res);
-    });
+    if (data.roomid === "") {
+      await $.get("/generate-room-id", function (res) {
+        data.roomid = res.roomId;
+      });
+    }
   }
+  window.location.href = `/cheesechat?username=${data.username}&${data.roomid}`;
 });
