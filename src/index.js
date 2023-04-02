@@ -8,13 +8,11 @@ const app = express();
 
 //socket-io server
 const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  /* options */
-});
+const options = {
+  /* ... */
+};
+const io = new Server(httpServer, options);
 
-io.on("connection", (socket) => {
-  // ...
-});
 httpServer.listen(3000);
 
 app.set("view engine", "ejs");
@@ -29,6 +27,11 @@ app.get("/", (req, res) => {
 app.get("/generate-room-id", (req, res) => {
   let roomId = uuidv4();
   res.status(200).send({ roomId: roomId });
+});
+
+app.get("/cheesechat", (req, res) => {
+  io.sockets.emit("create", req.query.roomId);
+  res.render("pages/chatpage");
 });
 
 app.listen(5000, () => {
