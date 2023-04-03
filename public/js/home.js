@@ -13,5 +13,5 @@ $(".submit-btn").click(async function () {
       });
     }
   }
-  window.location.href = `/cheesechat?username=${data.username}&${data.roomid}`;
+  window.location.href = `/cheesechat?username=${data.username}&roomId=${data.roomid}`;
 });

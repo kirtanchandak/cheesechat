@@ -21,6 +21,7 @@ const io = new Server(httpServer, {
 
 //for generating random room id
 import { v4 as uuidv4 } from "uuid";
+import { log } from "console";
 
 app.get("/", (req, res) => {
   res.render("pages/index");
@@ -35,7 +36,13 @@ app.get("/cheesechat", (req, res) => {
   res.render("pages/chatpage");
 });
 
-// io.on("socket", (socket) => {});
+io.on("connection", (socket) => {
+  socket.on("join-room", (username, roomId) => {
+    console.log(username);
+    socket.join(roomId);
+    io.to(roomId).emit("user-connected", username);
+  });
+});
 
 httpServer.listen(5000, () => {
   console.log("Server is running on port 5000");
