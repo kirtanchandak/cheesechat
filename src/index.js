@@ -1,24 +1,26 @@
 import express from "express";
-import bodyParser from "body-parser";
-import { createServer } from "http";
-import { Server } from "socket.io";
-import { v4 as uuidv4 } from "uuid";
-
 const app = express();
 
 //socket-io server
+import { createServer } from "http";
 const httpServer = createServer(app);
-const options = {
-  /* ... */
-};
-const io = new Server(httpServer, options);
 
-httpServer.listen(3000);
-
-app.set("view engine", "ejs");
-app.use(express.static("public"));
+import bodyParser from "body-parser";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//for using ejs files
+app.set("view engine", "ejs");
+//for using static files
+app.use(express.static("public"));
+
+import { Server } from "socket.io";
+const io = new Server(httpServer, {
+  /* ... */
+});
+
+//for generating random room id
+import { v4 as uuidv4 } from "uuid";
 
 app.get("/", (req, res) => {
   res.render("pages/index");
@@ -30,10 +32,11 @@ app.get("/generate-room-id", (req, res) => {
 });
 
 app.get("/cheesechat", (req, res) => {
-  io.sockets.emit("create", req.query.roomId);
   res.render("pages/chatpage");
 });
 
-app.listen(5000, () => {
+// io.on("socket", (socket) => {});
+
+httpServer.listen(5000, () => {
   console.log("Server is running on port 5000");
 });
