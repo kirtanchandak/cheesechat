@@ -42,6 +42,10 @@ io.on("connection", (socket) => {
     socket.join(roomId);
     io.to(roomId).emit("user-connected", username);
   });
+
+  socket.on("message", (username, roomId, msg) => {
+    io.to(roomId).emit("recieve-message", username, msg);
+  });
 });
 
 httpServer.listen(5000, () => {
