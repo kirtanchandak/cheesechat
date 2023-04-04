@@ -34,6 +34,7 @@ $(".send-msg").click(function () {
         </div>
       </div>`;
     $("#chat-area").append(html);
+    $("#chat-msg").val("");
   }
 });
 
